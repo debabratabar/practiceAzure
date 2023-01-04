@@ -1,0 +1,39 @@
+{
+	"name": "trigger_cp",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Pipl_copy_data_1",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"Pipl_input_container": "input",
+					"Pipl_output_container": "output",
+					"Pipl_folder": "files",
+					"pipl_input_fileName": "emp.csv",
+					"pipl_output_fileName": "emp_output.csv"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-12-15T00:00:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						15
+					],
+					"hours": [
+						10
+					]
+				}
+			}
+		}
+	}
+}

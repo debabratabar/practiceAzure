@@ -1,0 +1,9 @@
+{
+	"name": "dp203practice",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cbf04d38-87e3-4ffa-aedd-cbb6a634f865",
+		"tenantId": "26d546ab-b573-4ddb-925b-0d84eb3e2739"
+	}
+}

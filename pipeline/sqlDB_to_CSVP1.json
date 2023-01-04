@@ -1,0 +1,58 @@
+{
+	"name": "sqlDB_to_CSVP1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "sqldb_to_rawP1_product",
+						"type": "DataFlowReference",
+						"parameters": {
+							"fileName": {
+								"value": "'@{pipeline().parameters.filename}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"sink1": {
+								"containerName": {
+									"value": "@pipeline().parameters.containerName",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"filename": {
+				"type": "string",
+				"defaultValue": "ProductData"
+			},
+			"containerName": {
+				"type": "string",
+				"defaultValue": "raw"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-29T18:12:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,84 @@
+{
+	"name": "sqldb_to_rawP1_Cust",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "dp203DB_Cust_dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sqlDBsource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dp203practicesadb_blob",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectValues",
+					"description": "Selecting below mentioned columns 'CustomerID, FirstName, LastName, CompanyName, EmailAddress, Phone, ModifiedDate'"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     fileName as string",
+				"}",
+				"source(output(",
+				"          CustomerID as integer,",
+				"          NameStyle as boolean,",
+				"          Title as string,",
+				"          FirstName as string,",
+				"          MiddleName as string,",
+				"          LastName as string,",
+				"          Suffix as string,",
+				"          CompanyName as string,",
+				"          SalesPerson as string,",
+				"          EmailAddress as string,",
+				"          Phone as string,",
+				"          PasswordHash as string,",
+				"          PasswordSalt as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sqlDBsource",
+				"sqlDBsource select(mapColumn(",
+				"          CustomerID,",
+				"          FirstName,",
+				"          LastName,",
+				"          CompanyName,",
+				"          EmailAddress,",
+				"          Phone,",
+				"          ModifiedDate",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: true) ~> selectValues",
+				"selectValues sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:[(concat( toString($fileName) ,'_', toString(currentDate('UTC'),'dd-MM-yyyy') ,'.csv'))],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          CustomerID,",
+				"          FirstName,",
+				"          LastName,",
+				"          CompanyName,",
+				"          EmailAddress,",
+				"          Phone,",
+				"          ModifiedDate",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

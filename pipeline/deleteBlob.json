@@ -1,0 +1,48 @@
+{
+	"name": "deleteBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete_files",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "dp203practicesadb_blob",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": {
+								"value": "@pipeline().parameters.containerName",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"parameters": {
+			"containerName": {
+				"type": "string",
+				"defaultValue": "raw"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-29T16:51:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

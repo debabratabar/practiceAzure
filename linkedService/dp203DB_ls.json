@@ -1,0 +1,20 @@
+{
+	"name": "dp203DB_ls",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Linked service for \"dp203DB\" database",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "dp203DBsec",
+				"secretVersion": "f7c1f563ab824a07aa35d598ca70aeff"
+			}
+		}
+	}
+}

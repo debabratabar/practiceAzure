@@ -1,0 +1,28 @@
+{
+	"name": "DS_dp203_CountrySales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dp203DB_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CountryRegion",
+				"type": "varchar"
+			},
+			{
+				"name": "TotalSales",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			}
+		],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "CountrySales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
